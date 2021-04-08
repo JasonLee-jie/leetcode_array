@@ -3,3 +3,25 @@ class Solution {
         Arrays.sort(nums);
     }
 }
+//计数排序
+class Solution {
+    public void sortColors(int[] nums) {
+        //找最大的
+		int max = nums[0];
+		for(int i = 1; i < nums.length; i++) {
+			max = Math.max(nums[i], max);
+		}
+		//加入辅助函数
+		int arr[] = new int[max+1];
+		for(int i = 0; i < nums.length; i++) {
+			arr[nums[i]]++;
+		}
+		//更改原数组
+		int k = 0;
+		for(int i = 0; i < arr.length; i++) {
+			for(int j = arr[i]; j > 0; j--) {
+				nums[k++] = i;
+			}
+		}
+    }
+}
