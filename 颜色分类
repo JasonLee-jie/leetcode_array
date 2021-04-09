@@ -72,4 +72,32 @@ class Solution {
 
 三路快速排序方法
 设置三个 lt, gt, i 定义：nums[0...lt] == 0，nums[lt+1...i-1] = 1，nums[gt...n-1] == 2，遍历一遍改数列保持这个定义。
-
+class Solution {
+    public void sortColors(int[] nums) {
+      int len = nums.length;
+		if(len < 2) {
+			return ;
+		}
+		
+		int zero = 0;
+		int two = len;
+		int i = 0;
+		while(i < two) {
+			if(nums[i] == 0) {
+				s(nums,i,zero);//如果是0就要将其交换到前面去，zero表示0颜色的下标，存入一个0颜色，zero右移
+				zero++;
+				i++;
+			}else if(nums[i] == 1) {//若是颜色1，不需要移动位置，因为0,2颜色自会改变位置
+				i++;
+			}else {//颜色而要交换置从最后向前，存入了一个颜色2，two代表颜色2的索引，向左移就是
+				two--;
+				s(nums, i, two);
+			}
+		}
+	}
+	private void s(int[] nums, int i, int j) {
+		int temp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = temp;
+    }
+}
